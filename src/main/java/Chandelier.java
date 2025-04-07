@@ -1,10 +1,11 @@
 public class Chandelier extends LightingDevice {
-    public Chandelier(int power) {
+    private final int countLamp;
+    public Chandelier(int power, int countLamp) {
         super(power);
+        this.countLamp = countLamp;
     }
-
     @Override
     public int getEnergyConsumption() {
-        return 0;
+        return (getBrightness() * getPower()) * countLamp;
     }
 }
