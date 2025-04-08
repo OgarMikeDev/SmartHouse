@@ -1,4 +1,4 @@
-public abstract class LightingDevice {
+public abstract class LightingDevice implements ElectricDevice {
     public static final int MIN_BRIGHTNESS = 0;
     public static final int MAX_BRIGHTNESS = 100;
     private int brightness;
@@ -26,7 +26,7 @@ public abstract class LightingDevice {
         return power;
     }
 
-    public void changeBrightness(int rate) {
+    public void changeBrightness(int percent) {
         /*
         brightness - 100 работает устройство.
         rate - -10 пользователь хочет сделать ярче.
@@ -35,14 +35,22 @@ public abstract class LightingDevice {
         x = 10
          */
         int changed = 0;
-        int valuePercent = (brightness * Math.abs(rate)) / 100;
-        if (rate < 0) {
-            changed = brightness - valuePercent;
-        } else if (rate > 0) {
-            changed = brightness + valuePercent;
+
+        if (percent < 0) {
+            changed = brightness - percent;
+        } else if (percent > 0) {
+            changed = brightness + percent;
         }
         setBrightness(changed);
     }
 
-    public abstract int getEnergyConsumption();
+    @Override
+    public void switchOn() {
+        setBrightness(MAX_BRIGHTNESS);
+    }
+
+    @Override
+    public void switchOff() {
+        setBrightness(MIN_BRIGHTNESS);
+    }
 }
