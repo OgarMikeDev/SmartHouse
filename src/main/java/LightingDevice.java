@@ -37,9 +37,9 @@ public abstract class LightingDevice implements ElectricDevice {
         int changed = 0;
 
         if (percent < 0) {
-            changed = brightness - percent;
+            changed = brightness - Math.abs(percent);
         } else if (percent > 0) {
-            changed = brightness + percent;
+            changed = brightness + Math.abs(percent);
         }
         setBrightness(changed);
     }
