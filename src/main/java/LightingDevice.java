@@ -53,4 +53,9 @@ public abstract class LightingDevice implements ElectricDevice {
     public void switchOff() {
         setBrightness(MIN_BRIGHTNESS);
     }
+
+    @Override
+    public boolean isSwitched() {
+        return brightness > 0;
+    }
 }
